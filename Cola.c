@@ -125,14 +125,14 @@ void COLA_dequeue(Cola *c){
 		 * Si la dirección de memoria del segundo elemento (first->next) es nulo (no existe),
 		 * hacemos que la dirección de memoria del último elemento sea también el primero
 		 */
-        if (c->first->next == NULL) {
-            c->last = c->first;
-        }
-        
-        /*
-         * Liberamos la memoria correspondiente al elemento auxiliar
-         */
-        free(aux); 
+		if (c->first->next == NULL) {
+			c->last = c->first;
+		}
+		
+		/*
+		 * Liberamos la memoria correspondiente al elemento auxiliar
+		 */
+		free(aux); 
 
 	}
 
