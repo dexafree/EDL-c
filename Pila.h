@@ -47,7 +47,7 @@
 	 * Parámetros: No recibe
 	 * Retorno: Instancia de Pila
 	 */
-	Pila PILA_create();
+	Pila PILA_create ();
 
 
 	/*
@@ -59,7 +59,7 @@
 	 *
 	 * Retorno: No devuelve nada
 	 */
-	void PILA_push(Pila *p, Element e);
+	void PILA_push (Pila *p, Element e);
 
 
 	/*
@@ -70,7 +70,7 @@
 	 *
 	 * Retorno: No devuelve nada
 	 */
-	void PILA_pop(Pila *p);
+	void PILA_pop (Pila *p);
 
 
 	/*
@@ -81,7 +81,7 @@
 	 *
 	 * Retorno: Elemento en la posición más alta de la pila (último introducido)
 	 */
-	Element PILA_top(Pila p);
+	Element PILA_top (Pila p);
 
 
 	/*
@@ -93,7 +93,7 @@
 	 *    1 Si está vacía
 	 *    0 Si no está vacía
 	 */
-	int PILA_empty(Pila p);
+	int PILA_empty (Pila p);
 
 
 	/*
@@ -104,6 +104,6 @@
 	 *
 	 * Retorno: No devuelve nada
 	 */
-	void PILA_destroy(Pila *p);
+	void PILA_destroy (Pila *p);
 
 	#endif
