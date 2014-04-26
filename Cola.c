@@ -28,7 +28,7 @@ Cola COLA_create () {
 	Cola c; // Creamos una nueva variable de tipo cola
 	c.first = (Node *) malloc (sizeof (Node) ); // Pedimos memoria para el primer elemento
 
-	if (c.cap == NULL) {
+	if (c.first == NULL) {
 
 		// Si la asignación de memoria ha fallado, mostramos el error
 		printf("Error al crear la cua\n");
