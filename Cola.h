@@ -65,9 +65,37 @@
 	void COLA_dequeue (Cola *c);
 
 
-	
-	Element COLA_front (Cola c);
+	/*
+	 * Devuelve el elemento situado en primera posición
+	 * 
+	 * Parámetros:
+	 *    + Cola c: Cola de la cual obtener el primer elemento
+	 *
+	 * Retorno: Elemento situado en el primer lugar de la cola
+	 */
+	Element COLA_first (Cola c);
+
+
+	/*
+	 * Indica si la cola está vacía o no
+	 * Parámetros:
+	 *    + Cola c: Cola a comprobar pasada por valor (no será necesario modificarla)
+	 *
+	 * Retorno:
+	 *    1 Si está vacía
+	 *    0 Si no está vacía
+	 */
 	int COLA_empty (Cola c);
+
+
+	/*
+	 * Destruye el contenido de la cola
+	 *
+	 * Parámetros:
+	 *    + Cola *c: Cola a destruir pasada por referencia (ya que la modificaremos)
+	 *
+	 * Retorno: No devuelve nada
+	 */
 	void COLA_destroy (Cola *c);
 
 	#endif

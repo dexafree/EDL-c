@@ -137,3 +137,95 @@ void COLA_dequeue(Cola *c){
 	}
 
 }
+
+
+/*
+ * Devuelve el elemento situado en primera posición
+ * 
+ * Parámetros:
+ *    + Cola c: Cola de la cual obtener el primer elemento
+ *
+ * Retorno: Elemento situado en el primer lugar de la cola
+ */
+Element COLA_first(Cola c){
+
+	Element e; // Declaramos el elemento que devolveremos
+	
+	/*
+	 * Comprobamos si hay algun elemento real introducido
+	 * Recordemos que al instanciar la cola hemos introducido un elemento vacio,
+	 * cuyo campo next apuntaba a NULL
+	 */
+	if(c.first->next == NULL){
+	
+		e = ELEMENT_indefinit(); // Si es el elemento vacío, devolvemos un elemento indefinido
+
+		/* Sería lo mismo que hacer
+		 * e = c.first->e;
+		 * ya que es exactamente el mismo elemento que hemos introducido al instanciar la cola
+		 */ 
+	
+	} else {
+	
+		e = c.first->next->e; // Si existe el elemento, obtenemos el valor
+	
+	}
+
+	return e; // Devolvemos el elemento
+
+}
+
+
+/*
+ * Indica si la cola está vacía o no
+ * Parámetros:
+ *    + Cola c: Cola a comprobar pasada por valor (no será necesario modificarla)
+ *
+ * Retorno:
+ *    1 Si está vacía
+ *    0 Si no está vacía
+ */
+int COLA_empty(Cola c){
+
+	/*
+	 * Simplemente debemos comprobar si el primer elemento introducido (el auxiliar introducido
+	 * al instanciar la cola), su campo next apunta a nulo
+	 *
+	 * EXPLICACIÓN: Si hubiéramos introducido algún elemento, ese campo apuntaria al primer elemento REAL
+	 */
+	return c.first->next == NULL; 
+
+}
+
+
+/*
+ * Destruye el contenido de la cola
+ *
+ * Parámetros:
+ *    + Cola *c: Cola a destruir pasada por referencia (ya que la modificaremos)
+ *
+ * Retorno: No devuelve nada
+ */
+void COLA_destroy(Cola *c){
+
+	Node *aux; // Nos creamos un nodo auxiliar
+
+	while(c->first != NULL){ // Ejecutamos el bucle mientras el campo first no sea nulo
+
+		aux = c->first; // Copiamos la dirección de memoria del primer elemento en el nodo auxiliar
+
+		/*
+		 * Hacemos que el campo first de la cola apunte al siguiente elemento, de modo que el
+		 * segundo elemento en ese momento se convierte en el primero, quedando el anterior "primero"
+		 * guardado en el nodo auxiliar
+		 */
+		c->first = c->first->next;
+
+		free(aux); // Liberamos la memoria del primer elemento
+
+	}
+
+	c->first = NULL; // Forzamos que la dirección de memoria que apunta al primer elemento de la cola sea nulo
+	c->last = NULL; // Forzamos que la dirección de memoria que apunta al último elemento de la cola sea nulo
+
+}
