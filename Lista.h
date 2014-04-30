@@ -9,7 +9,7 @@
  * 
  * Con el objetivo de hacerla genérica, se hablará de variables de tipo Element,
  * el cual a la hora de usarse en un programa real deberá sustituirse por
- * el tipo de variables que vaya a contener la pila (int, char, float, tipos propios...)
+ * el tipo de variables que vaya a contener la lista (int, char, float, tipos propios...)
  *
  *
  *
@@ -29,7 +29,7 @@
 	typedef struct N {
 		Element e; //Contendrá el elemento como tal
 		struct N *next;  //Contendrá la dirección de memoria del siguiente elemento
-	}Lista;
+	} Node;
 
 	/*
 	 * Definición del tipo Cola
@@ -41,7 +41,7 @@
 	typedef struct{
 		Node *first; // Contiene la dirección de memoria del primer nodo (elemento), para poder volver a él
 		Node *before; // Contiene la dirección de memoria del nodo (elemento) immediatamente anterior al PDI
-	}
+	} Lista;
 
 
 	/*
@@ -51,11 +51,86 @@
 	 * Retorno: Instancia de Lista
 	 */
 	Lista LISTA_create();
+
+	/*
+	 * Introduce un elemento en la lista, en la posición immediatamente siguiente al elemento del PDI
+	 * 
+	 * Parámetros:
+	 *    + Lista *l: Lista a modificar pasada por referencia (ya que la modificaremos)
+	 *    + Element e: Elemento a introducir
+	 *
+	 * Retorno: No devuelve nada
+	 */
 	void LISTA_insert(Lista *l, Element e);
+
+
+	/*
+	 * Elimina el elemento marcado por el PDI en la lista
+	 *
+	 * Parámetros:
+	 *    + Lista *l: Lista a modificar pasada por referencia (ya que la modificaremos)
+	 *
+	 * Retorno: No devuelve nada
+	 */
 	void LISTA_delete(Lista *l);
+
+
+	/*
+	 * Devuelve el elemento marcado por el PDI dentro de la lista
+	 *
+	 * Parámetros:
+	 *    + Lista l: Lista de la cual obtener el elemento
+	 *
+	 * Retorno: Elemento en la posición marcada por el PDI dentro de la lista
+	 */
 	Element LISTA_get(Lista l);
+
+
+	/*
+	 * Indica si la lista está vacía o no
+	 * Parámetros:
+	 *    + Lista l: Lista a comprobar pasada por valor (no será necesario modificarla)
+	 *
+	 * Retorno:
+	 *    1 Si está vacía
+	 *    0 Si no está vacía
+	 */
 	int LISTA_empty(Lista l);
+
+	/*
+	 * Mueve el PDI al inicio de la lista
+	 *
+	 * Parámetros:
+	 *	+ Lista *l: Lista a modificar pasada por referencia (ya que haremos una modificación a nivel interno)
+	 */
 	void LISTA_goToStart(Lista *l);
+
+	/*
+	 * Mueve el PDI a la posición immediatamente siguiente
+	 *
+	 * Parámetros:
+	 *	+ Lista *l: Lista a modificar pasada por referencia (ya que haremos una modificación a nivel interno)
+	 */
 	void LISTA_forward(Lista *l);
+
+	/*
+	 * Indica si el PDI de la lista está ubicado en el último elemento
+	 * Parámetros:
+	 *    + Lista l: Lista a comprobar pasada por valor (no será necesario modificarla)
+	 *
+	 * Retorno:
+	 *    1 Si es el último elemento
+	 *    0 Si no es el último elemento
+	 */
 	int LISTA_end(Lista l);
+
+
+	/*
+	 * Destruye el contenido de la lista
+	 *
+	 * Parámetros:
+	 *    + Lista *l: Lista a destruir pasada por referencia (ya que la modificaremos)
+	 *
+	 * Retorno: No devuelve nada
+	 */
 	void LISTA_destroy(Lista *l);
