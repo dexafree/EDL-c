@@ -65,6 +65,18 @@
 
 
 	/*
+	 * Introduce un elemento en la lista de forma ordenada (en el lugar que le corresponde según definamos)
+	 * 
+	 * Parámetros:
+	 *    + Lista *l: Lista a modificar pasada por referencia (ya que la modificaremos)
+	 *    + Element e: Elemento a introducir
+	 *
+	 * Retorno: No devuelve nada
+	 */
+	void LISTA_insertOrdered(Lista *l, Element e);
+
+
+	/*
 	 * Elimina el elemento marcado por el PDI en la lista
 	 *
 	 * Parámetros:

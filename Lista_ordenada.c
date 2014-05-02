@@ -80,6 +80,52 @@ void LISTA_insert (Lista *l, Element e) {
 
 
 /*
+ * Introduce un elemento en la lista de forma ordenada (en el lugar que le corresponde según definamos)
+ * 
+ * Parámetros:
+ *    + Lista *l: Lista a modificar pasada por referencia (ya que la modificaremos)
+ *    + Element e: Elemento a introducir
+ *
+ * Retorno: No devuelve nada
+ */
+void LISTA_insertOrdered (Lista *l, Element e) {
+
+	Node *aux;
+	aux = (Node *) malloc (sizeof(Node));
+
+	if(aux == NULL){
+
+		printf("INSERT ERROR\n");
+
+	} else {
+
+		aux->e = e; // Asignamos el valor al campo elemento del auxiliar
+		l->before = l->first; // Ponemos el PDI al inicio
+
+		/*
+		 * Si el elemento que estoy mirando es mas pequeño que el que quiero insertar, avanzo
+		 * 
+		 * OJO!! TIENE QUE IR EN ESTE ORDEN!
+		 * Si l->before->next es NULL, l->before->next->e NO EXISTE!!!
+		 * Si lo pusieramos al reves, primero evaluaria l->before->next->e
+		 * C si detecta que la primera condicion es cierta, no evalúa la siguiente
+		 */
+		while (l->before->next != NULL && l->before->next->e < e) { 
+
+			l->before = l->before->next;
+
+		}
+
+		aux->next = l->before->next;
+		l->before->next = aux;
+		l->before = aux;
+
+	}
+
+}
+
+
+/*
  * Elimina el elemento marcado por el PDI en la lista
  *
  * Parámetros:
