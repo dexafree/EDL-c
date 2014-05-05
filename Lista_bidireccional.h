@@ -1,10 +1,10 @@
 /*
- * ARCHIVO DE CABECERAS DE FUNCIONES DE UNA LISTA DINÁMICA EN C
+ * ARCHIVO DE CABECERAS DE FUNCIONES DE UNA LISTA DINÁMICA BIDIRECCIONAL EN C
  * 
  * La lista no sigue ningún esquema de movimiento definido (ni LIFO ni FIFO)
  *
- * Por tal de movernos por ella, iremos moviendo un cursor (PDI), el cual sólo
- * puede desplazarse hacia delante (de uno en uno) o moverse al inicio
+ * Por tal de movernos por ella, iremos moviendo un cursor (PDI), el cual puede
+ * desplazarse hacia delante (de uno en uno), hacia atrás o moverse al inicio
  * Podremos recuperar el elemento en el que se encuentre el PDI
  * 
  * Con el objetivo de hacerla genérica, se hablará de variables de tipo Element,
@@ -39,8 +39,9 @@
 	 *    + La dirección de memoria del elemento immediatamente anterior al PDI
 	 */
 	typedef struct{
-		Node *first; // Contiene la dirección de memoria del primer nodo (elemento), para poder volver a él
-		Node *before; // Contiene la dirección de memoria del nodo (elemento) immediatamente anterior al PDI
+		Node *first; // Contiene la dirección de memoria del primer nodo (elemento), para poder volver a él (será un elemento no utilizable)
+		Node *last; // Contiene la dirección de memoria del último nodo (elemento), para poder volver a él (será un elemento no utilizable)
+		Node *pdi; // Contiene la dirección de memoria del PDI. Ahora lo hacemos así, ya que necesitaremos tenerlo guardado aparte de los otros dos
 	} Lista;
 
 
@@ -61,7 +62,18 @@
 	 *
 	 * Retorno: No devuelve nada
 	 */
-	void LISTA_insert(Lista *l, Element e);
+	void LISTA_insertForward(Lista *l, Element e);
+
+	/*
+	 * Introduce un elemento en la lista, en la posición immediatamente interior al elemento del PDI
+	 * 
+	 * Parámetros:
+	 *    + Lista *l: Lista a modificar pasada por referencia (ya que la modificaremos)
+	 *    + Element e: Elemento a introducir
+	 *
+	 * Retorno: No devuelve nada
+	 */
+	void LISTA_insertBehind(Lista *l, Element e);
 
 
 	/*
@@ -106,12 +118,28 @@
 	void LISTA_goToStart(Lista *l);
 
 	/*
+	 * Mueve el PDI al final de la lista
+	 *
+	 * Parámetros:
+	 *	+ Lista *l: Lista a modificar pasada por referencia (ya que haremos una modificación a nivel interno)
+	 */
+	void LISTA_goToEnd(Lista *l);
+
+	/*
 	 * Mueve el PDI a la posición immediatamente siguiente
 	 *
 	 * Parámetros:
 	 *	+ Lista *l: Lista a modificar pasada por referencia (ya que haremos una modificación a nivel interno)
 	 */
 	void LISTA_forward(Lista *l);
+
+	/*
+	 * Mueve el PDI a la posición immediatamente anterior
+	 *
+	 * Parámetros:
+	 *	+ Lista *l: Lista a modificar pasada por referencia (ya que haremos una modificación a nivel interno)
+	 */
+	void LISTA_behind(Lista *l);
 
 	/*
 	 * Indica si el PDI de la lista está ubicado en el último elemento
@@ -124,6 +152,17 @@
 	 */
 	int LISTA_end(Lista l);
 
+	/*
+	 * Indica si el PDI de la lista está ubicado en el primer elemento
+	 * Parámetros:
+	 *    + Lista l: Lista a comprobar pasada por valor (no será necesario modificarla)
+	 *
+	 * Retorno:
+	 *    1 Si es el primer elemento
+	 *    0 Si no es el primer elemento
+	 */
+	int LISTA_start(Lista l);
+
 
 	/*
 	 * Destruye el contenido de la lista
@@ -134,5 +173,3 @@
 	 * Retorno: No devuelve nada
 	 */
 	void LISTA_destroy(Lista *l);
-
-	#endif
